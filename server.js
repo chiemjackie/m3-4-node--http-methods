@@ -3,6 +3,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const { validate }  = require('./handlers.js');
+
+const { stock, customers } = require ('./data/promo.js');
 
 express()
   .use(function (req, res, next) {
@@ -20,6 +23,8 @@ express()
   .set('view engine', 'ejs')
 
   // endpoints
+  .post('/order', validate)
 
+  
   .get('*', (req, res) => res.send('Dang. 404.'))
   .listen(8000, () => console.log(`Listening on port 8000`));
